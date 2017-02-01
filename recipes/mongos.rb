@@ -35,6 +35,12 @@ user node['mongodb3']['user'] do
   action :create
 end
 
+# Depricated variables
+if node['mongodb3']['version'].to_f >= 3.4
+  node.rm('mongodb3','config','mongos','sharding','autoSplit')
+  node.rm('mongodb3','config','mongos','sharding','chunkSize')
+end
+
 # Create the Mongos config file
 template node['mongodb3']['mongos']['config_file'] do
   source 'mongodb.conf.erb'

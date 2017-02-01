@@ -72,7 +72,9 @@ if node['mongodb3']['package']['repo']['apt']['keyserver'].nil?
 end
 
 if node['mongodb3']['package']['repo']['apt']['key'].nil?
-  if pkg_major_version >= 3.2
+  if pkg_major_version >= 3.4
+    node.set['mongodb3']['package']['repo']['apt']['key'] = '0C49F3730359A14518585931BC711F9BA15703C6'
+  elsif pkg_major_version >= 3.2
     node.set['mongodb3']['package']['repo']['apt']['key'] = 'EA312927'
   else
     node.set['mongodb3']['package']['repo']['apt']['key'] = '7F0CEB10'
